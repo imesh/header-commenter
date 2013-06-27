@@ -63,24 +63,27 @@ namespace Imesh.Tools.HeaderCommentManager
                 var filePaths = Directory.GetFiles(TxtSourceFolder.Text, TxtSearchPattern.Text, searchOption);
                 foreach (string filePath in filePaths)
                 {
-                    TxtLog.Text += String.Format("File: {0}", filePath);
+                    TxtLog.Text += String.Format("File: {0}{1}", filePath, Environment.NewLine);
                     if (ChkBackupOriginal.IsChecked.Value)
                     {
                         File.Copy(filePath, String.Format("{0}.bkp", filePath));
-                        TxtLog.Text += String.Format("Backup file created");
+                        TxtLog.Text += String.Format("Backup file created {0}", Environment.NewLine);
                     }
 
                     text = File.ReadAllText(filePath);
                     if (ChkReplaceExisting.IsChecked.HasValue && ChkReplaceExisting.IsChecked.Value)
                     {
                         int start = text.IndexOf("/*");
-                        int end = text.IndexOf("*/");                        
-                        text = text.Substring(start, text.Length - end);
+                        int end = text.IndexOf("*/");
+                        if ((start >= 0) && (end >= 0) && (end < text.Length))
+                        {
+                            text = text.Substring(start, text.Length - end);
+                        }
                     }
                     text = String.Format("{0}{1}{2}", TxtHeaderComment.Text, Environment.NewLine, text);
 
                     File.WriteAllText(filePath, text);
-                    TxtLog.Text += String.Format("Header comment added");
+                    TxtLog.Text += String.Format("Header comment added {0}", Environment.NewLine);
                 }
             }
             catch (Exception e)
