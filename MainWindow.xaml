@@ -18,6 +18,7 @@
         <TextBox x:Name="TxtLog" Height="140" Margin="19,431,132,-26" TextWrapping="Wrap" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
         <Label Content="Search Pattern" HorizontalAlignment="Left" Margin="19,73,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="TxtSearchPattern" HorizontalAlignment="Left" Height="23" Margin="19,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="416" Text="*.cs" Grid.ColumnSpan="2"/>
+        <CheckBox x:Name="ChkReplaceExisting" Content="Replace Existing Header Comment" HorizontalAlignment="Left" Margin="172,318,0,0" VerticalAlignment="Top" Grid.Column="1"/>
 
     </Grid>
 </Window>

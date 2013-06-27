@@ -71,6 +71,12 @@ namespace Imesh.Tools.HeaderCommentManager
                     }
 
                     text = File.ReadAllText(filePath);
+                    if (ChkReplaceExisting.IsChecked.HasValue && ChkReplaceExisting.IsChecked.Value)
+                    {
+                        int start = text.IndexOf("/*");
+                        int end = text.IndexOf("*/");                        
+                        text = text.Substring(start, text.Length - end);
+                    }
                     text = String.Format("{0}{1}{2}", TxtHeaderComment.Text, Environment.NewLine, text);
 
                     File.WriteAllText(filePath, text);
